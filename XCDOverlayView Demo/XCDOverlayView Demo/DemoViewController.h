@@ -6,8 +6,6 @@
 
 @interface DemoViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton *playButton;
-@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, weak) IBOutlet UIButton *downloadButton;
+@property (nonatomic, weak) IBOutlet UISwitch *localMovieSwitch;
 
 @end

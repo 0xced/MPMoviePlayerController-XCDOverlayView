@@ -17,55 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehG-0v-JQf">
-                                <rect key="frame" x="205" y="241" width="190" height="118"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-Df-fVY" userLabel="Container View">
+                                <rect key="frame" x="203" y="245" width="195" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzw-Wv-b46">
+                                        <rect key="frame" x="42" y="0.0" width="122" height="30"/>
+                                        <state key="normal" title="Play Movie">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playMovie:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWG-CF-i9T"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use local movie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-lv-ctP">
+                                        <rect key="frame" x="65" y="46" width="122" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udM-AC-ypX">
+                                        <rect key="frame" x="8" y="41" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="118" id="pO2-I7-1Zx"/>
-                                    <constraint firstAttribute="width" constant="190" id="pjt-dg-DOJ"/>
+                                    <constraint firstAttribute="height" constant="110" id="BDM-Ub-JXP"/>
+                                    <constraint firstAttribute="width" constant="195" id="Vxd-7i-Ppu"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzw-Wv-b46">
-                                <rect key="frame" x="264" y="260" width="73" height="30"/>
-                                <state key="normal" title="Play Video">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xfs-vC-UWT"/>
-                                </connections>
-                            </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nd0-wC-uEk">
-                                <rect key="frame" x="225" y="299" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="sJo-TK-Vpv"/>
-                                </constraints>
-                            </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGa-if-Hw1">
-                                <rect key="frame" x="244" y="308" width="112" height="30"/>
-                                <state key="normal" title="Download Video">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="downloadVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yxD-X5-RTY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="ehG-0v-JQf" secondAttribute="centerX" id="0Ot-Nw-5e6"/>
-                            <constraint firstAttribute="centerY" secondItem="nd0-wC-uEk" secondAttribute="centerY" id="8C2-oQ-Bgd"/>
-                            <constraint firstAttribute="centerX" secondItem="nd0-wC-uEk" secondAttribute="centerX" id="8WQ-dn-8gt"/>
-                            <constraint firstItem="Mzw-Wv-b46" firstAttribute="top" secondItem="ehG-0v-JQf" secondAttribute="top" constant="19" id="Ms6-Ax-Pes"/>
-                            <constraint firstAttribute="centerY" secondItem="ehG-0v-JQf" secondAttribute="centerY" id="YYi-xx-XGJ"/>
-                            <constraint firstAttribute="centerX" secondItem="Mzw-Wv-b46" secondAttribute="centerX" id="Zwe-Ch-03U"/>
-                            <constraint firstAttribute="centerX" secondItem="vGa-if-Hw1" secondAttribute="centerX" id="aUQ-g1-o32"/>
-                            <constraint firstItem="vGa-if-Hw1" firstAttribute="bottom" secondItem="ehG-0v-JQf" secondAttribute="bottom" constant="-21" id="oa0-1d-bwR"/>
+                            <constraint firstAttribute="centerY" secondItem="SLG-Df-fVY" secondAttribute="centerY" id="Zra-nk-pDD"/>
+                            <constraint firstAttribute="centerX" secondItem="SLG-Df-fVY" secondAttribute="centerX" id="b3v-jx-PFm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="downloadButton" destination="vGa-if-Hw1" id="gVc-Vu-BCS"/>
-                        <outlet property="playButton" destination="Mzw-Wv-b46" id="QyW-Qn-Dgl"/>
-                        <outlet property="progressView" destination="nd0-wC-uEk" id="HG1-QL-3WK"/>
+                        <outlet property="localMovieSwitch" destination="udM-AC-ypX" id="xan-z2-NTQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

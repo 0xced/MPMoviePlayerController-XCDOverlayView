@@ -4,92 +4,74 @@
 
 #import "DemoViewController.h"
 
-#import <AVFoundation/AVMetadataFormat.h>
+#import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <MPMoviePlayerController+XCDOverlayView/MPMoviePlayerController+XCDOverlayView.h>
 
-#import "MovieController.h"
 #import "OverlayView.h"
-
-@interface DemoViewController ()
-@property (readonly) MovieController *movieController;
-@property (strong) NSURLSessionDownloadTask *downloadTask;
-@end
 
 @implementation DemoViewController
 
-static void *CountOfBytesReceivedContext = &CountOfBytesReceivedContext;
-
-- (instancetype) initWithCoder:(NSCoder *)decoder
+- (NSURL *) movieURL
 {
-	if (!(self = [super initWithCoder:decoder]))
-		return nil;
-	
-	NSURL *movieURL = [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"];
-	_movieController = [[MovieController alloc] initWithMovieURL:movieURL];
-	
-	return self;
+	if (self.localMovieSwitch.on)
+	{
+		NSString *moviePath = NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
+		NSAssert(moviePath != nil, @"You must set the MOVIE_PATH environment variable.");
+		return [NSURL fileURLWithPath:moviePath];
+	}
+	else
+	{
+		return [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"];
+	}
 }
 
-- (void) viewDidLoad
-{
-	[super viewDidLoad];
-	
-	BOOL hasLocalMovie = [self.movieController hasLocalMovie];
-	self.progressView.progress = hasLocalMovie ? 1.f : 0.f;
-	self.downloadButton.enabled = !hasLocalMovie;
-}
+#pragma mark - Actions
 
-#pragma mark - Video Playing
-
-- (IBAction) playVideo:(id)sender
+- (IBAction) playMovie:(id)sender
 {
-	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:self.movieController.movieURL];
+	NSURL *movieURL = [self movieURL];
+	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
 	[self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
 	
-	[self.movieController getMovieInfo:^(NSDictionary *movieInfo)
+	[self getMovieInfoWithURL:(NSURL *)movieURL completionHandler:^(NSDictionary *movieInfo)
 	{
-		OverlayView *overlayView = [OverlayView overlayViewWithTitle:movieInfo[AVMetadataCommonKeyTitle] copyright:movieInfo[AVMetadataCommonKeyCopyrights]];
+		NSString *title = movieInfo[AVMetadataCommonKeyTitle] ?: @"Title: N/A";
+		NSString *copyright = movieInfo[AVMetadataCommonKeyCopyrights] ?: @"Copyright: N/A";
+		OverlayView *overlayView = [OverlayView overlayViewWithTitle:title copyright:copyright];
 		moviePlayerViewController.moviePlayer.overlayView_xcd = overlayView;
 	}];
 }
 
-#pragma mark - Video Download
+#pragma mark - Movie Metadata
 
-- (IBAction) downloadVideo:(id)sender
+static NSDictionary * MovieInfo(AVAsset *asset)
 {
-	[sender removeTarget:self action:_cmd forControlEvents:UIControlEventTouchUpInside];
-	[sender addTarget:self action:@selector(cancelDownload:) forControlEvents:UIControlEventTouchUpInside];
-	[sender setTitle:@"Cancel Download" forState:UIControlStateNormal];
-	
-	self.downloadTask = [self.movieController startDownload];
-	[self.downloadTask addObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived)) options:0 context:CountOfBytesReceivedContext];
-}
-
-- (IBAction) cancelDownload:(id)sender
-{
-	[sender removeTarget:self action:_cmd forControlEvents:UIControlEventTouchUpInside];
-	[sender addTarget:self action:@selector(downloadVideo:) forControlEvents:UIControlEventTouchUpInside];
-	[sender setTitle:@"Download Video" forState:UIControlStateNormal];
-	
-	[self.movieController cancelDownload];
-	[self.downloadTask removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived)) context:CountOfBytesReceivedContext];
-}
-
-#pragma mark - KVO
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	if (context == CountOfBytesReceivedContext)
+	NSMutableDictionary *movieInfo = [NSMutableDictionary new];
+	for (NSString *key in @[ AVMetadataCommonKeyTitle, AVMetadataCommonKeyCopyrights ])
 	{
-		dispatch_async(dispatch_get_main_queue(), ^{
-			NSURLSessionDownloadTask *downloadTask = object;
-			self.progressView.progress = (float)downloadTask.countOfBytesReceived / (float)downloadTask.countOfBytesExpectedToReceive;
-		});
+		AVMetadataItem *item = [[AVMetadataItem metadataItemsFromArray:asset.commonMetadata withKey:key keySpace:AVMetadataKeySpaceCommon] firstObject];
+		id<NSObject, NSCopying> value = item.value;
+		if (value)
+			movieInfo[key] = [value description];
+	}
+	return movieInfo;
+}
+
+- (void) getMovieInfoWithURL:(NSURL *)movieURL completionHandler:(void (^)(NSDictionary *movieInfo))completionHandler
+{
+	AVAsset *asset = [AVAsset assetWithURL:movieURL];
+	if ([movieURL isFileURL])
+	{
+		completionHandler(MovieInfo(asset));
 	}
 	else
 	{
-		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+		[asset loadValuesAsynchronouslyForKeys:@[ NSStringFromSelector(@selector(commonMetadata)) ] completionHandler:^{
+			dispatch_async(dispatch_get_main_queue(), ^{
+				completionHandler(MovieInfo(asset));
+			});
+		}];
 	}
 }
 

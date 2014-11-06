@@ -10,7 +10,6 @@
 		C2C8F5241A0B77BE0036FA0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5231A0B77BE0036FA0C /* AppDelegate.m */; };
 		C2C8F5271A0B77BE0036FA0C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */; };
 		C2C8F52A1A0B77BE0036FA0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F5281A0B77BE0036FA0C /* Main.storyboard */; };
-		C2C8F5481A0B85960036FA0C /* MovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5471A0B85960036FA0C /* MovieController.m */; };
 		C2C8F54E1A0B91FE0036FA0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F54A1A0B91FE0036FA0C /* Images.xcassets */; };
 		C2C8F5501A0B91FE0036FA0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F54C1A0B91FE0036FA0C /* LaunchScreen.xib */; };
 		C2C8F5511A0B91FE0036FA0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F54D1A0B91FE0036FA0C /* main.m */; };
@@ -26,8 +25,6 @@
 		C2C8F5251A0B77BE0036FA0C /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		C2C8F5291A0B77BE0036FA0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C2C8F5461A0B85960036FA0C /* MovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieController.h; sourceTree = "<group>"; };
-		C2C8F5471A0B85960036FA0C /* MovieController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieController.m; sourceTree = "<group>"; };
 		C2C8F54A1A0B91FE0036FA0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C2C8F54B1A0B91FE0036FA0C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2C8F54C1A0B91FE0036FA0C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -74,8 +71,6 @@
 				C2C8F5231A0B77BE0036FA0C /* AppDelegate.m */,
 				C2C8F5251A0B77BE0036FA0C /* DemoViewController.h */,
 				C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */,
-				C2C8F5461A0B85960036FA0C /* MovieController.h */,
-				C2C8F5471A0B85960036FA0C /* MovieController.m */,
 				C2C8F5281A0B77BE0036FA0C /* Main.storyboard */,
 				C2C8F55F1A0BFD6D0036FA0C /* OverlayView.xib */,
 				C2C8F5621A0BFE8C0036FA0C /* OverlayView.h */,
@@ -179,7 +174,6 @@
 				C2C8F5641A0BFE8C0036FA0C /* OverlayView.m in Sources */,
 				C2C8F5241A0B77BE0036FA0C /* AppDelegate.m in Sources */,
 				C2C8F5271A0B77BE0036FA0C /* DemoViewController.m in Sources */,
-				C2C8F5481A0B85960036FA0C /* MovieController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
