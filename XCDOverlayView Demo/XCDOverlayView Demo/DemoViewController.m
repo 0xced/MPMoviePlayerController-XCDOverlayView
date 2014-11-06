@@ -4,9 +4,12 @@
 
 #import "DemoViewController.h"
 
+#import <AVFoundation/AVMetadataFormat.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <MPMoviePlayerController+XCDOverlayView/MPMoviePlayerController+XCDOverlayView.h>
 
 #import "MovieController.h"
+#import "OverlayView.h"
 
 @interface DemoViewController ()
 @property (readonly) MovieController *movieController;
@@ -46,7 +49,8 @@ static void *CountOfBytesReceivedContext = &CountOfBytesReceivedContext;
 	
 	[self.movieController getMovieInfo:^(NSDictionary *movieInfo)
 	{
-		NSLog(@"%@", movieInfo);
+		OverlayView *overlayView = [OverlayView overlayViewWithTitle:movieInfo[AVMetadataCommonKeyTitle] copyright:movieInfo[AVMetadataCommonKeyCopyrights]];
+		moviePlayerViewController.moviePlayer.overlayView_xcd = overlayView;
 	}];
 }
 
