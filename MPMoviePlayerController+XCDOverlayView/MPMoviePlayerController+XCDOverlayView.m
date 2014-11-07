@@ -159,19 +159,24 @@ static void *OverlayViewKey = &OverlayViewKey;
 	// Recursive block from http://stackoverflow.com/questions/19884403/recursive-block-and-retain-cycles-in-arc/19905407#19905407
 	__block __weak void (^weakInsertOverlayMiddleView)(void);
 	void (^insertOverlayMiddleView)(void);
+	__weak __typeof(self) weakSelf = self;
 	weakInsertOverlayMiddleView = insertOverlayMiddleView = ^void(void)
 	{
+		__strong __typeof(self) strongSelf = weakSelf;
+		if (!strongSelf)
+			return;
+		
 		// Waiting for the view to be in the hierarchy ensures that its subviews are properly positioned and sized
 		// Consequently, `VideoPlaybackOverlayViews` will return a non-nil result
-		if (self.view.superview)
+		if (strongSelf.view.superview)
 		{
 			if (overlayMiddleView.superview)
 				return;
 			
-			NSMapTable *videoPlaybackOverlayViews = VideoPlaybackOverlayViews(self.view);
+			NSMapTable *videoPlaybackOverlayViews = VideoPlaybackOverlayViews(strongSelf.view);
 			if (!videoPlaybackOverlayViews)
 			{
-				if (self.controlStyle == MPMovieControlStyleFullscreen)
+				if (strongSelf.controlStyle == MPMovieControlStyleFullscreen)
 				{
 					NSLog(@"MPMoviePlayerController+XCDOverlayView is not supported on iOS %@", [[UIDevice currentDevice] systemVersion]);
 				}
