@@ -26,6 +26,14 @@
 	}
 }
 
+- (void) viewDidLoad
+{
+	[super viewDidLoad];
+	
+	NSString *moviePath = NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
+	self.localMovieSwitch.on = moviePath && [[NSFileManager defaultManager] fileExistsAtPath:moviePath isDirectory:NULL];
+}
+
 #pragma mark - Actions
 
 - (IBAction) playMovie:(id)sender
