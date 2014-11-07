@@ -21,4 +21,12 @@
 	return overlayView;
 }
 
+- (void) willMoveToSuperview:(UIView *)superview
+{
+	self.alpha = 0.f;
+	[UIView animateWithDuration:0.3f animations:^{
+		self.alpha = 1.f;
+	}];
+}
+
 @end
