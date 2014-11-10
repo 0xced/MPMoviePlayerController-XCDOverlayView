@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-Df-fVY" userLabel="Container View">
-                                <rect key="frame" x="203" y="245" width="195" height="110"/>
+                                <rect key="frame" x="160" y="215" width="281" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzw-Wv-b46">
-                                        <rect key="frame" x="42" y="0.0" width="122" height="30"/>
+                                        <rect key="frame" x="85" y="0.0" width="122" height="30"/>
                                         <state key="normal" title="Play Movie">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -30,19 +30,46 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use local movie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-lv-ctP">
-                                        <rect key="frame" x="65" y="46" width="122" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="108" y="46" width="122" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udM-AC-ypX">
-                                        <rect key="frame" x="8" y="41" width="51" height="31"/>
+                                        <rect key="frame" x="51" y="41" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="useLocalMovie:" destination="BYZ-38-t0r" eventType="valueChanged" id="HTi-Lm-52h"/>
+                                        </connections>
                                     </switch>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="265" translatesAutoresizingMaskIntoConstraints="NO" id="pXl-G7-vEh">
+                                        <rect key="frame" x="8" y="80" width="265" height="70"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="You must set a valid ">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="MOVIE_PATH">
+                                                <attributes>
+                                                    <font key="NSFont" size="15" name="Menlo-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" environment variable for playing a local movie.">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="BDM-Ub-JXP"/>
-                                    <constraint firstAttribute="width" constant="195" id="Vxd-7i-Ppu"/>
+                                    <constraint firstAttribute="height" constant="170" id="BDM-Ub-JXP"/>
+                                    <constraint firstAttribute="width" constant="281" id="Vxd-7i-Ppu"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -53,6 +80,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="explanationLabel" destination="pXl-G7-vEh" id="pap-Nl-6lK"/>
                         <outlet property="localMovieSwitch" destination="udM-AC-ypX" id="xan-z2-NTQ"/>
                     </connections>
                 </viewController>

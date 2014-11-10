@@ -12,26 +12,30 @@
 
 @implementation DemoViewController
 
+- (NSString *) moviePath
+{
+	return NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
+}
+
+- (BOOL) isValidMoviePath
+{
+	NSString *moviePath = self.moviePath;
+	return moviePath && [[NSFileManager defaultManager] fileExistsAtPath:moviePath isDirectory:NULL];
+}
+
 - (NSURL *) movieURL
 {
 	if (self.localMovieSwitch.on)
-	{
-		NSString *moviePath = NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
-		NSAssert(moviePath != nil, @"You must set the MOVIE_PATH environment variable.");
-		return [NSURL fileURLWithPath:moviePath];
-	}
+		return [NSURL fileURLWithPath:self.moviePath];
 	else
-	{
 		return [NSURL URLWithString:@"http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_640x360.m4v"];
-	}
 }
 
 - (void) viewDidLoad
 {
 	[super viewDidLoad];
 	
-	NSString *moviePath = NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
-	self.localMovieSwitch.on = moviePath && [[NSFileManager defaultManager] fileExistsAtPath:moviePath isDirectory:NULL];
+	self.localMovieSwitch.on = self.isValidMoviePath;
 }
 
 #pragma mark - Actions
@@ -49,6 +53,12 @@
 		OverlayView *overlayView = [OverlayView overlayViewWithTitle:title copyright:copyright];
 		moviePlayerViewController.moviePlayer.overlayView_xcd = overlayView;
 	}];
+}
+
+- (IBAction) useLocalMovie:(id)sender
+{
+	BOOL displayExplanationLabel = self.localMovieSwitch.on && !self.isValidMoviePath;
+	self.explanationLabel.hidden = !displayExplanationLabel;
 }
 
 #pragma mark - Movie Metadata
