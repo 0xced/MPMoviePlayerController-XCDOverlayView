@@ -14,7 +14,8 @@
 
 - (NSString *) moviePath
 {
-	return NSProcessInfo.processInfo.environment[@"MOVIE_PATH"];
+	NSURL *bundledMovieURL = [[[NSBundle mainBundle] URLsForResourcesWithExtension:@"m4v" subdirectory:nil] firstObject];
+	return NSProcessInfo.processInfo.environment[@"MOVIE_PATH"] ?: bundledMovieURL.path;
 }
 
 - (BOOL) isValidMoviePath
