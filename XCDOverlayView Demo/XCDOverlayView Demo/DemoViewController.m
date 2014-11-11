@@ -46,12 +46,13 @@
 	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
 	[self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
 	
+	__weak MPMoviePlayerViewController *weakMoviePlayerViewController = moviePlayerViewController;
 	[self getMovieInfoWithURL:(NSURL *)movieURL completionHandler:^(NSDictionary *movieInfo)
 	{
 		NSString *title = movieInfo[AVMetadataCommonKeyTitle] ?: @"Title: N/A";
 		NSString *copyright = movieInfo[AVMetadataCommonKeyCopyrights] ?: @"Copyright: N/A";
 		OverlayView *overlayView = [OverlayView overlayViewWithTitle:title copyright:copyright];
-		moviePlayerViewController.moviePlayer.overlayView_xcd = overlayView;
+		weakMoviePlayerViewController.moviePlayer.overlayView_xcd = overlayView;
 	}];
 }
 
