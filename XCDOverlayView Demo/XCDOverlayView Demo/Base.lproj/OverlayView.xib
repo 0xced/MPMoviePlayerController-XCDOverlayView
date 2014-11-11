@@ -19,26 +19,35 @@
                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="1" height="1"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="hjR-IG-xtt">
-                    <rect key="frame" x="10" y="569" width="580" height="20.5"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w3O-DW-PpA">
+                    <rect key="frame" x="10" y="558" width="580" height="32"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                    <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="deviceWhite"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="1" height="1"/>
-                </label>
+                    <size key="titleShadowOffset" width="1" height="1"/>
+                    <state key="normal" title="Copyright">
+                        <color key="titleColor" white="0.96999999999999997" alpha="1" colorSpace="deviceWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.textAlignment">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="copyright:" destination="iN0-l3-epB" eventType="touchUpInside" id="D71-ck-0j4"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="cAz-q1-OE1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="6XU-6v-gH1"/>
+                <constraint firstItem="w3O-DW-PpA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Ado-mU-wDB"/>
                 <constraint firstAttribute="trailing" secondItem="cAz-q1-OE1" secondAttribute="trailing" constant="10" id="D5d-Hc-kPT"/>
                 <constraint firstItem="cAz-q1-OE1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="JQM-aY-YD5"/>
-                <constraint firstAttribute="bottom" secondItem="hjR-IG-xtt" secondAttribute="bottom" constant="10" id="Jfy-lF-eOO"/>
-                <constraint firstItem="hjR-IG-xtt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="eYY-7J-fDF"/>
-                <constraint firstAttribute="trailing" secondItem="hjR-IG-xtt" secondAttribute="trailing" constant="10" id="tD7-1u-suO"/>
+                <constraint firstAttribute="trailing" secondItem="w3O-DW-PpA" secondAttribute="trailing" constant="10" id="ZCW-9m-DbW"/>
+                <constraint firstAttribute="bottom" secondItem="w3O-DW-PpA" secondAttribute="bottom" constant="10" id="zPO-zR-LJu"/>
             </constraints>
             <connections>
-                <outlet property="copyrightLabel" destination="hjR-IG-xtt" id="S2c-7r-KOU"/>
+                <outlet property="copyrightButton" destination="w3O-DW-PpA" id="WDm-DW-lmh"/>
                 <outlet property="titleLabel" destination="cAz-q1-OE1" id="oKI-6s-w50"/>
             </connections>
             <point key="canvasLocation" x="394" y="399"/>
