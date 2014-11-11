@@ -1,8 +1,8 @@
 ## About
 
-[![Pod Version](https://img.shields.io/cocoapods/v/MPMoviePlayerController-XCDOverlayView.svg?style=flat)](http://cocoadocs.org/docsets/MPMoviePlayerController-XCDOverlayView/)
-[![Platform](https://img.shields.io/cocoapods/p/MPMoviePlayerController-XCDOverlayView.svg?style=flat)](http://cocoadocs.org/docsets/MPMoviePlayerController-XCDOverlayView/)
-[![License](https://img.shields.io/cocoapods/l/MPMoviePlayerController-XCDOverlayView.svg?style=flat)](LICENSE)
+[![Pod Version](https://img.shields.io/cocoapods/v/MPMoviePlayerController+XCDOverlayView.svg?style=flat)](http://cocoadocs.org/docsets/MPMoviePlayerController-XCDOverlayView/)
+[![Platform](https://img.shields.io/cocoapods/p/MPMoviePlayerController+XCDOverlayView.svg?style=flat)](http://cocoadocs.org/docsets/MPMoviePlayerController-XCDOverlayView/)
+[![License](https://img.shields.io/cocoapods/l/MPMoviePlayerController+XCDOverlayView.svg?style=flat)](LICENSE)
 
 Displaying some information in overlay to a movie is an easy task. Synchronizing the overlay with the playback controls of `MPMoviePlayerController` is a hard task. **MPMoviePlayerController+XCDOverlayView** lets you add your own view to a `MPMoviePlayerController` and automatically synchronizes it with the playback controls.
 
