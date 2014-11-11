@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OverlayView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cAz-q1-OE1">
+                    <rect key="frame" x="10" y="10" width="580" height="25"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="deviceWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="1" height="1"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="hjR-IG-xtt">
+                    <rect key="frame" x="10" y="569" width="580" height="20.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="deviceWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="1" height="1"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cAz-q1-OE1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="6XU-6v-gH1"/>
+                <constraint firstAttribute="trailing" secondItem="cAz-q1-OE1" secondAttribute="trailing" constant="10" id="D5d-Hc-kPT"/>
+                <constraint firstItem="cAz-q1-OE1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="JQM-aY-YD5"/>
+                <constraint firstAttribute="bottom" secondItem="hjR-IG-xtt" secondAttribute="bottom" constant="10" id="Jfy-lF-eOO"/>
+                <constraint firstItem="hjR-IG-xtt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="eYY-7J-fDF"/>
+                <constraint firstAttribute="trailing" secondItem="hjR-IG-xtt" secondAttribute="trailing" constant="10" id="tD7-1u-suO"/>
+            </constraints>
+            <connections>
+                <outlet property="copyrightLabel" destination="hjR-IG-xtt" id="S2c-7r-KOU"/>
+                <outlet property="titleLabel" destination="cAz-q1-OE1" id="oKI-6s-w50"/>
+            </connections>
+            <point key="canvasLocation" x="394" y="399"/>
+        </view>
+    </objects>
+</document>

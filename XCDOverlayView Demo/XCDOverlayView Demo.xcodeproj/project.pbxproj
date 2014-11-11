@@ -1,0 +1,330 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2C8F5241A0B77BE0036FA0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5231A0B77BE0036FA0C /* AppDelegate.m */; };
+		C2C8F5271A0B77BE0036FA0C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */; };
+		C2C8F52A1A0B77BE0036FA0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F5281A0B77BE0036FA0C /* Main.storyboard */; };
+		C2C8F54E1A0B91FE0036FA0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F54A1A0B91FE0036FA0C /* Images.xcassets */; };
+		C2C8F5501A0B91FE0036FA0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F54C1A0B91FE0036FA0C /* LaunchScreen.xib */; };
+		C2C8F5511A0B91FE0036FA0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F54D1A0B91FE0036FA0C /* main.m */; };
+		C2C8F55E1A0BFD0F0036FA0C /* libMPMoviePlayerController+XCDOverlayView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C8F55D1A0BFD0F0036FA0C /* libMPMoviePlayerController+XCDOverlayView.a */; };
+		C2C8F5611A0BFD6D0036FA0C /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2C8F55F1A0BFD6D0036FA0C /* OverlayView.xib */; };
+		C2C8F5641A0BFE8C0036FA0C /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C8F5631A0BFE8C0036FA0C /* OverlayView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C2C8F51B1A0B77BE0036FA0C /* XCDOverlayView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XCDOverlayView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2C8F5221A0B77BE0036FA0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C2C8F5231A0B77BE0036FA0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C2C8F5251A0B77BE0036FA0C /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		C2C8F5291A0B77BE0036FA0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C2C8F54A1A0B91FE0036FA0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C2C8F54B1A0B91FE0036FA0C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2C8F54C1A0B91FE0036FA0C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		C2C8F54D1A0B91FE0036FA0C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C2C8F55D1A0BFD0F0036FA0C /* libMPMoviePlayerController+XCDOverlayView.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMPMoviePlayerController+XCDOverlayView.a"; path = "../Debug-iphonesimulator/libMPMoviePlayerController+XCDOverlayView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2C8F5601A0BFD6D0036FA0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OverlayView.xib; sourceTree = "<group>"; };
+		C2C8F5621A0BFE8C0036FA0C /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
+		C2C8F5631A0BFE8C0036FA0C /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C2C8F5181A0B77BE0036FA0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2C8F55E1A0BFD0F0036FA0C /* libMPMoviePlayerController+XCDOverlayView.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2C8F5121A0B77BE0036FA0C = {
+			isa = PBXGroup;
+			children = (
+				C2C8F51D1A0B77BE0036FA0C /* XCDOverlayView Demo */,
+				C2C8F55C1A0BFCFD0036FA0C /* Frameworks */,
+				C2C8F51C1A0B77BE0036FA0C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2C8F51C1A0B77BE0036FA0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2C8F51B1A0B77BE0036FA0C /* XCDOverlayView Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2C8F51D1A0B77BE0036FA0C /* XCDOverlayView Demo */ = {
+			isa = PBXGroup;
+			children = (
+				C2C8F5221A0B77BE0036FA0C /* AppDelegate.h */,
+				C2C8F5231A0B77BE0036FA0C /* AppDelegate.m */,
+				C2C8F5251A0B77BE0036FA0C /* DemoViewController.h */,
+				C2C8F5261A0B77BE0036FA0C /* DemoViewController.m */,
+				C2C8F5281A0B77BE0036FA0C /* Main.storyboard */,
+				C2C8F55F1A0BFD6D0036FA0C /* OverlayView.xib */,
+				C2C8F5621A0BFE8C0036FA0C /* OverlayView.h */,
+				C2C8F5631A0BFE8C0036FA0C /* OverlayView.m */,
+				C2C8F5491A0B91FE0036FA0C /* Supporting Files */,
+			);
+			path = "XCDOverlayView Demo";
+			sourceTree = "<group>";
+		};
+		C2C8F5491A0B91FE0036FA0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2C8F54A1A0B91FE0036FA0C /* Images.xcassets */,
+				C2C8F54B1A0B91FE0036FA0C /* Info.plist */,
+				C2C8F54C1A0B91FE0036FA0C /* LaunchScreen.xib */,
+				C2C8F54D1A0B91FE0036FA0C /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2C8F55C1A0BFCFD0036FA0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2C8F55D1A0BFD0F0036FA0C /* libMPMoviePlayerController+XCDOverlayView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C2C8F51A1A0B77BE0036FA0C /* XCDOverlayView Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2C8F53E1A0B77BE0036FA0C /* Build configuration list for PBXNativeTarget "XCDOverlayView Demo" */;
+			buildPhases = (
+				C2C8F5171A0B77BE0036FA0C /* Sources */,
+				C2C8F5181A0B77BE0036FA0C /* Frameworks */,
+				C2C8F5191A0B77BE0036FA0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "XCDOverlayView Demo";
+			productName = "XCDOverlayView Demo";
+			productReference = C2C8F51B1A0B77BE0036FA0C /* XCDOverlayView Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C2C8F5131A0B77BE0036FA0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Cédric Luthi";
+				TargetAttributes = {
+					C2C8F51A1A0B77BE0036FA0C = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = C2C8F5161A0B77BE0036FA0C /* Build configuration list for PBXProject "XCDOverlayView Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C2C8F5121A0B77BE0036FA0C;
+			productRefGroup = C2C8F51C1A0B77BE0036FA0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C2C8F51A1A0B77BE0036FA0C /* XCDOverlayView Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C2C8F5191A0B77BE0036FA0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2C8F5501A0B91FE0036FA0C /* LaunchScreen.xib in Resources */,
+				C2C8F5611A0BFD6D0036FA0C /* OverlayView.xib in Resources */,
+				C2C8F52A1A0B77BE0036FA0C /* Main.storyboard in Resources */,
+				C2C8F54E1A0B91FE0036FA0C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C2C8F5171A0B77BE0036FA0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2C8F5511A0B91FE0036FA0C /* main.m in Sources */,
+				C2C8F5641A0BFE8C0036FA0C /* OverlayView.m in Sources */,
+				C2C8F5241A0B77BE0036FA0C /* AppDelegate.m in Sources */,
+				C2C8F5271A0B77BE0036FA0C /* DemoViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C2C8F5281A0B77BE0036FA0C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2C8F5291A0B77BE0036FA0C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C2C8F55F1A0BFD6D0036FA0C /* OverlayView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2C8F5601A0BFD6D0036FA0C /* Base */,
+			);
+			name = OverlayView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C2C8F53C1A0B77BE0036FA0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C2C8F53D1A0B77BE0036FA0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C2C8F53F1A0B77BE0036FA0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "XCDOverlayView Demo/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C2C8F5401A0B77BE0036FA0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "XCDOverlayView Demo/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C2C8F5161A0B77BE0036FA0C /* Build configuration list for PBXProject "XCDOverlayView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2C8F53C1A0B77BE0036FA0C /* Debug */,
+				C2C8F53D1A0B77BE0036FA0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2C8F53E1A0B77BE0036FA0C /* Build configuration list for PBXNativeTarget "XCDOverlayView Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2C8F53F1A0B77BE0036FA0C /* Debug */,
+				C2C8F5401A0B77BE0036FA0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C2C8F5131A0B77BE0036FA0C /* Project object */;
+}
