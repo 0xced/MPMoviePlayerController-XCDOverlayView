@@ -12,7 +12,9 @@ Displaying some information in overlay to a movie is an easy task. Synchronizing
 
 MPMoviePlayerController+XCDOverlayView is available through CocoaPods.
 
-	pod "MPMoviePlayerController+XCDOverlayView", "~> 1.0.0"
+```ruby
+pod "MPMoviePlayerController+XCDOverlayView", "~> 1.0.0"
+```
 
 Alternatively, you can manually use the provided static library. In order to do so you must:
 
@@ -27,7 +29,7 @@ These steps will ensure that `#import <MPMoviePlayerController+XCDOverlayView/MP
 
 MPMoviePlayerController+XCDOverlayView is a category on MPMoviePlayerController which adds a single property:
 
-```
+```objc
 @property (nonatomic, strong) UIView *overlayView_xcd;
 ```
 
