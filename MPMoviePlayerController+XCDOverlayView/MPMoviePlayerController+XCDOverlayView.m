@@ -42,7 +42,7 @@ static void *OverlayMiddleViewKey = &OverlayMiddleViewKey;
 		UIView *overlayMiddleView = objc_getAssociatedObject(videoPlaybackOverlayView, OverlayMiddleViewKey);
 		
 		const CGFloat height = CGRectGetHeight(videoPlaybackOverlayView.bounds) - (CGRectGetHeight(topPlaybackControlView.bounds) + CGRectGetHeight(bottomPlaybackControlView.bounds));
-		overlayMiddleView.frame = CGRectMake(CGRectGetMinX(videoPlaybackOverlayView.bounds), CGRectGetMaxY(topPlaybackControlView.bounds), CGRectGetWidth(videoPlaybackOverlayView.bounds), height);
+		overlayMiddleView.frame = CGRectMake(CGRectGetMinX(videoPlaybackOverlayView.bounds), CGRectGetMaxY(topPlaybackControlView.bounds), CGRectGetWidth(videoPlaybackOverlayView.bounds), height + 25);
 	}
 	else
 	{
