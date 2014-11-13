@@ -78,6 +78,13 @@ static void *OverlayMiddleViewKey = &OverlayMiddleViewKey;
 	}
 }
 
+- (UIView *) hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+	UIView *view = [super hitTest:point withEvent:event];
+	NSLog(@"-[%@ hitTest:%@ withEvent:%@]\n---> %@", self.class, NSStringFromCGPoint(point), event, view);
+	return view;
+}
+
 @end
 
 
