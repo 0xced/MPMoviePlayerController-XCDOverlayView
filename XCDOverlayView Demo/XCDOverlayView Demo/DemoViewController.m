@@ -49,6 +49,8 @@
 {
 	NSURL *movieURL = [self movieURL];
 	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
+	moviePlayerViewController.moviePlayer.initialPlaybackTime = 4 * 60;
+	[moviePlayerViewController.moviePlayer performSelector:@selector(pause) withObject:nil afterDelay:0];
 	[self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
 	
 	__weak MPMoviePlayerViewController *weakMoviePlayerViewController = moviePlayerViewController;
