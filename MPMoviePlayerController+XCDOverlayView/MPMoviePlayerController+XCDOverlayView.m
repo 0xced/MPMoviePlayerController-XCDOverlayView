@@ -106,6 +106,33 @@ static NSArray * PlaybackControlViews(UIView *view)
 	return nil;
 }
 
+static BOOL PointInside(UIView *videoPlaybackOverlayView, CGPoint point, UIEvent *event, UIView *view)
+{
+	if ([view isKindOfClass:[UIControl class]])
+	{
+		return [view pointInside:[videoPlaybackOverlayView convertPoint:point toView:view] withEvent:event];
+	}
+	else
+	{
+		BOOL pointInside = NO;
+		for (UIView *subview in view.subviews)
+			pointInside = pointInside || PointInside(videoPlaybackOverlayView, point, event, subview);
+		return pointInside;
+	}
+}
+
+static BOOL (*pointInsideWithEventIMP)(UIView *, SEL, CGPoint, UIEvent *); // original implementation of -[MPVideoPlaybackOverlayView pointInside:withEvent:]
+static BOOL PlaybackOverlayViewPointInsideWithEvent(UIView *self, SEL _cmd, CGPoint point, UIEvent *event)
+{
+	// The MPVideoPlaybackOverlayView class is a liar. It overrides the `pointInside:withEvent:`
+	// method and returns YES only when the point is inside the top or bottom playback view.
+	// In order to support touches in the overlay, we must therefore extend this method with our own check.
+	BOOL originalPointInside = pointInsideWithEventIMP(self, _cmd, point, event);
+	UIView *overlayMiddleView = objc_getAssociatedObject(self, OverlayMiddleViewKey);
+	BOOL pointInside = overlayMiddleView && PointInside(self, point, event, overlayMiddleView);
+	return originalPointInside || pointInside;
+}
+
 static NSMapTable * VideoPlaybackOverlayViews(UIView *view)
 {
 	static void *VideoPlaybackOverlayViewsKey = &VideoPlaybackOverlayViewsKey;
@@ -117,6 +144,12 @@ static NSMapTable * VideoPlaybackOverlayViews(UIView *view)
 	NSArray *playbackControlViews = PlaybackControlViews(view);
 	if (playbackControlViews)
 	{
+		static dispatch_once_t once;
+		dispatch_once(&once, ^{
+			Method pointInsideWithEvent = class_getInstanceMethod([view class], @selector(pointInside:withEvent:));
+			pointInsideWithEventIMP = (__typeof(pointInsideWithEventIMP))method_getImplementation(pointInsideWithEvent);
+			method_setImplementation(pointInsideWithEvent, (IMP)PlaybackOverlayViewPointInsideWithEvent);
+		});
 		overlayViews = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory capacity:3];
 		[overlayViews setObject:view forKey:VideoPlaybackOverlayViewKey];
 		[overlayViews setObject:playbackControlViews[0] forKey:TopPlaybackControlViewKey];
