@@ -6,6 +6,7 @@
 
 @interface DemoViewController : UIViewController
 
+@property (nonatomic, weak) IBOutlet UISwitch *displayOverlaySwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *localMovieSwitch;
 @property (nonatomic, weak) IBOutlet UILabel *explanationLabel;
 

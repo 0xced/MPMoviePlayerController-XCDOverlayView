@@ -51,6 +51,9 @@
 	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
 	[self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
 	
+	if (!self.displayOverlaySwitch.on)
+		return;
+	
 	__weak MPMoviePlayerViewController *weakMoviePlayerViewController = moviePlayerViewController;
 	[self getMovieInfoWithURL:(NSURL *)movieURL completionHandler:^(NSDictionary *movieInfo)
 	{
