@@ -6,9 +6,9 @@
 
 #import <objc/runtime.h>
 
-static const NSString * VideoPlaybackOverlayViewKey = @"VideoPlaybackOverlayView"; // isa MPVideoPlaybackOverlayView
-static const NSString * TopPlaybackControlViewKey = @"TopPlaybackControlView"; // isa _UIBackdropView
-static const NSString * BottomPlaybackControlViewKey = @"BottomPlaybackControlView"; // isa _UIBackdropView
+static NSString *const VideoPlaybackOverlayViewKey = @"VideoPlaybackOverlayView"; // isa MPVideoPlaybackOverlayView
+static NSString *const TopPlaybackControlViewKey = @"TopPlaybackControlView"; // isa _UIBackdropView
+static NSString *const BottomPlaybackControlViewKey = @"BottomPlaybackControlView"; // isa _UIBackdropView
 static NSMapTable * VideoPlaybackOverlayViews(UIView *view);
 
 static void *PlaybackControlViewContext = &PlaybackControlViewContext;
