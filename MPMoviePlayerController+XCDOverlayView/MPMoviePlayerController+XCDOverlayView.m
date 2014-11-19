@@ -67,7 +67,7 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 	
 	id observer = [XCDMoviePlayerControllerPlaybackControlViewObserver sharedObserver];
 	// iOS 8 requires observing `bounds` and iOS 7 requires observing `frame`
-	for (NSString *keyPath in @[ NSStringFromSelector(@selector(bounds)), NSStringFromSelector(@selector(frame)) ])
+	for (NSString *keyPath in @[ @"bounds", @"frame" ])
 	{
 		for (UIView *playbackControlView in @[ topPlaybackControlView, bottomPlaybackControlView ])
 		{
