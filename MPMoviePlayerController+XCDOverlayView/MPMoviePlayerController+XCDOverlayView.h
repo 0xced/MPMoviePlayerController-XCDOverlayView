@@ -4,6 +4,9 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 
+extern NSString *const XCDOverlayViewDidShowNotification;
+extern NSString *const XCDOverlayViewDidHideNotification;
+
 @interface MPMoviePlayerController (XCDOverlayView)
 
 /**

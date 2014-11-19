@@ -6,12 +6,16 @@
 
 #import <objc/runtime.h>
 
+NSString *const XCDOverlayViewDidShowNotification = @"XCDOverlayViewDidShowNotification";
+NSString *const XCDOverlayViewDidHideNotification = @"XCDOverlayViewDidHideNotification";
+
 static NSString *const VideoPlaybackOverlayViewKey = @"VideoPlaybackOverlayView"; // isa MPVideoPlaybackOverlayView
 static NSString *const TopPlaybackControlViewKey = @"TopPlaybackControlView"; // isa _UIBackdropView
 static NSString *const BottomPlaybackControlViewKey = @"BottomPlaybackControlView"; // isa _UIBackdropView
 static NSMapTable * VideoPlaybackOverlayViews(UIView *view);
 
-static void *PlaybackControlViewContext = &PlaybackControlViewContext;
+static void *PlaybackControlViewBoundsContext = &PlaybackControlViewBoundsContext;
+static void *PlaybackControlViewHiddenContext = &PlaybackControlViewHiddenContext;
 
 static void *OverlayMiddleViewKey = &OverlayMiddleViewKey;
 static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
@@ -32,11 +36,11 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 	return sharedObserver;
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(UIView *)playbackControlView change:(NSDictionary *)change context:(void *)context
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(UIView *)view change:(NSDictionary *)change context:(void *)context
 {
-	if (context == PlaybackControlViewContext)
+	if (context == PlaybackControlViewBoundsContext)
 	{
-		UIView *videoPlaybackOverlayView = playbackControlView.superview;
+		UIView *videoPlaybackOverlayView = view.superview;
 		NSMapTable *videoPlaybackOverlayViews = VideoPlaybackOverlayViews(videoPlaybackOverlayView);
 		UIView *topPlaybackControlView = [videoPlaybackOverlayViews objectForKey:TopPlaybackControlViewKey];
 		UIView *bottomPlaybackControlView = [videoPlaybackOverlayViews objectForKey:BottomPlaybackControlViewKey];
@@ -45,9 +49,18 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 		const CGFloat height = CGRectGetHeight(videoPlaybackOverlayView.bounds) - (CGRectGetHeight(topPlaybackControlView.bounds) + CGRectGetHeight(bottomPlaybackControlView.bounds));
 		overlayMiddleView.frame = CGRectMake(CGRectGetMinX(videoPlaybackOverlayView.bounds), CGRectGetMaxY(topPlaybackControlView.bounds), CGRectGetWidth(videoPlaybackOverlayView.bounds), height);
 	}
+	else if (context == PlaybackControlViewHiddenContext)
+	{
+		if ([change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]])
+			return;
+		
+		MPMoviePlayerController *moviePlayerController = objc_getAssociatedObject(view, MPMoviePlayerControllerKey);
+		NSString *notificationName = view.hidden ? XCDOverlayViewDidHideNotification : XCDOverlayViewDidShowNotification;
+		[[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:moviePlayerController.overlayView_xcd];
+	}
 	else
 	{
-		[super observeValueForKeyPath:keyPath ofObject:playbackControlView change:change context:context];
+		[super observeValueForKeyPath:keyPath ofObject:view change:change context:context];
 	}
 }
 
@@ -62,6 +75,7 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 - (void) willMoveToSuperview:(UIView *)superview
 {
 	NSMapTable *videoPlaybackOverlayViews = VideoPlaybackOverlayViews(superview ?: self.superview);
+	UIView *videoPlaybackOverlayView = superview ?: self.superview;
 	UIView *topPlaybackControlView = [videoPlaybackOverlayViews objectForKey:TopPlaybackControlViewKey];
 	UIView *bottomPlaybackControlView = [videoPlaybackOverlayViews objectForKey:BottomPlaybackControlViewKey];
 	
@@ -72,11 +86,17 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 		for (UIView *playbackControlView in @[ topPlaybackControlView, bottomPlaybackControlView ])
 		{
 			if (superview)
-				[playbackControlView addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionInitial context:PlaybackControlViewContext];
+				[playbackControlView addObserver:observer forKeyPath:keyPath options:NSKeyValueObservingOptionInitial context:PlaybackControlViewBoundsContext];
 			else
-				[playbackControlView removeObserver:observer forKeyPath:keyPath context:PlaybackControlViewContext];
+				[playbackControlView removeObserver:observer forKeyPath:keyPath context:PlaybackControlViewBoundsContext];
 		}
 	}
+	
+	NSString *keyPath = @"hidden";
+	if (superview)
+		[videoPlaybackOverlayView addObserver:observer forKeyPath:keyPath options:(NSKeyValueObservingOptions)(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:PlaybackControlViewHiddenContext];
+	else
+		[videoPlaybackOverlayView removeObserver:observer forKeyPath:keyPath context:PlaybackControlViewHiddenContext];
 }
 
 @end
