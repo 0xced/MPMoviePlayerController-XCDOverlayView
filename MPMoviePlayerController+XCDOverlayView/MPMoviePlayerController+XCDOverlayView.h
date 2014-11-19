@@ -12,4 +12,6 @@
  */
 @property (nonatomic, strong) UIView *overlayView_xcd;
 
+@property (nonatomic, strong) NSSet *interactiveOverlayViews_xcd;
+
 @end

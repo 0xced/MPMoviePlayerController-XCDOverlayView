@@ -14,6 +14,7 @@ static NSMapTable * VideoPlaybackOverlayViews(UIView *view);
 static void *PlaybackControlViewContext = &PlaybackControlViewContext;
 
 static void *OverlayMiddleViewKey = &OverlayMiddleViewKey;
+static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 
 @interface XCDMoviePlayerControllerPlaybackControlViewObserver : NSObject
 + (instancetype) sharedObserver;
@@ -108,7 +109,14 @@ static NSArray * PlaybackControlViews(UIView *view)
 
 static BOOL PointInside(UIView *videoPlaybackOverlayView, CGPoint point, UIEvent *event, UIView *view)
 {
-	if ([view isKindOfClass:[UIControl class]])
+	MPMoviePlayerController *moviePlayerController = objc_getAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey);
+	BOOL shouldHandleTouch;
+	if (moviePlayerController.interactiveOverlayViews_xcd)
+		shouldHandleTouch = [moviePlayerController.interactiveOverlayViews_xcd containsObject:view];
+	else
+		shouldHandleTouch = [view isKindOfClass:[UIControl class]];
+	
+	if (shouldHandleTouch)
 	{
 		return [view pointInside:[videoPlaybackOverlayView convertPoint:point toView:view] withEvent:event];
 	}
@@ -219,6 +227,8 @@ static void *OverlayViewKey = &OverlayViewKey;
 			UIView *videoPlaybackOverlayView = [videoPlaybackOverlayViews objectForKey:VideoPlaybackOverlayViewKey];
 			// `overlayMiddleView` must also be associated to `videoPlaybackOverlayView` in order to easily retrieve it later (in XCDMoviePlayerControllerPlaybackControlViewObserver)
 			objc_setAssociatedObject(videoPlaybackOverlayView, OverlayMiddleViewKey, overlayMiddleView, OBJC_ASSOCIATION_ASSIGN);
+			// The movie player controller needs to be accessed inside the `PointInside` implementation
+			objc_setAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
 			[videoPlaybackOverlayView addSubview:overlayMiddleView];
 		}
 		else
@@ -228,6 +238,18 @@ static void *OverlayViewKey = &OverlayViewKey;
 	};
 	
 	insertOverlayMiddleView();
+}
+
+static void *InteractiveOverlayViewsKey = &InteractiveOverlayViewsKey;
+
+- (NSSet *) interactiveOverlayViews_xcd
+{
+	return objc_getAssociatedObject(self, InteractiveOverlayViewsKey);
+}
+
+- (void) setInteractiveOverlayViews_xcd:(NSSet *)interactiveOverlayViews_xcd
+{
+	objc_setAssociatedObject(self, InteractiveOverlayViewsKey, interactiveOverlayViews_xcd, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
