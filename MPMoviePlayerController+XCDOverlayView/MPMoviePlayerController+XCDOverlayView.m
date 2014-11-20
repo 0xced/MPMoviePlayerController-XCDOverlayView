@@ -20,6 +20,26 @@ static void *PlaybackControlViewHiddenContext = &PlaybackControlViewHiddenContex
 static void *OverlayMiddleViewKey = &OverlayMiddleViewKey;
 static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 
+
+@interface XCDOverlayWeakObjectContainter : NSObject
+@property (nonatomic, readonly, weak) id object;
+@end
+
+@implementation XCDOverlayWeakObjectContainter
+
+- (instancetype) initWithObject:(id)object
+{
+	if (!(self = [super init]))
+		return nil;
+	
+	_object = object;
+	
+	return self;
+}
+
+@end
+
+
 @interface XCDMoviePlayerControllerPlaybackControlViewObserver : NSObject
 + (instancetype) sharedObserver;
 @end
@@ -51,10 +71,10 @@ static void *MPMoviePlayerControllerKey = &MPMoviePlayerControllerKey;
 	}
 	else if (context == PlaybackControlViewHiddenContext)
 	{
-		if ([change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]])
+		MPMoviePlayerController *moviePlayerController = [objc_getAssociatedObject(view, MPMoviePlayerControllerKey) object];
+		if ([change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]] || !moviePlayerController)
 			return;
 		
-		MPMoviePlayerController *moviePlayerController = objc_getAssociatedObject(view, MPMoviePlayerControllerKey);
 		NSString *notificationName = view.hidden ? XCDOverlayViewDidHideNotification : XCDOverlayViewDidShowNotification;
 		[[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:moviePlayerController.overlayView_xcd];
 	}
@@ -129,7 +149,7 @@ static NSArray * PlaybackControlViews(UIView *view)
 
 static BOOL PointInside(UIView *videoPlaybackOverlayView, CGPoint point, UIEvent *event, UIView *view)
 {
-	MPMoviePlayerController *moviePlayerController = objc_getAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey);
+	MPMoviePlayerController *moviePlayerController = [objc_getAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey) object];
 	BOOL shouldHandleTouch;
 	if (moviePlayerController.interactiveOverlayViews_xcd)
 		shouldHandleTouch = [moviePlayerController.interactiveOverlayViews_xcd containsObject:view];
@@ -248,7 +268,7 @@ static void *OverlayViewKey = &OverlayViewKey;
 			// `overlayMiddleView` must also be associated to `videoPlaybackOverlayView` in order to easily retrieve it later (in XCDMoviePlayerControllerPlaybackControlViewObserver)
 			objc_setAssociatedObject(videoPlaybackOverlayView, OverlayMiddleViewKey, overlayMiddleView, OBJC_ASSOCIATION_ASSIGN);
 			// The movie player controller needs to be accessed inside the `PointInside` implementation
-			objc_setAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
+			objc_setAssociatedObject(videoPlaybackOverlayView, MPMoviePlayerControllerKey, [[XCDOverlayWeakObjectContainter alloc] initWithObject:self], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 			[videoPlaybackOverlayView addSubview:overlayMiddleView];
 		}
 		else
