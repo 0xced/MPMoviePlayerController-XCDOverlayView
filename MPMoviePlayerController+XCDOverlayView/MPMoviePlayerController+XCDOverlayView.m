@@ -280,6 +280,8 @@ static void *OverlayViewKey = &OverlayViewKey;
 	insertOverlayMiddleView();
 }
 
+#pragma mark - Interactive Views
+
 static void *InteractiveOverlayViewsKey = &InteractiveOverlayViewsKey;
 
 - (NSSet *) interactiveOverlayViews_xcd
@@ -290,6 +292,49 @@ static void *InteractiveOverlayViewsKey = &InteractiveOverlayViewsKey;
 - (void) setInteractiveOverlayViews_xcd:(NSSet *)interactiveOverlayViews_xcd
 {
 	objc_setAssociatedObject(self, InteractiveOverlayViewsKey, interactiveOverlayViews_xcd, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+#pragma mark - Plaback Controls Visibility
+
+- (BOOL) isOverlayVisible_xcd
+{
+	NSMapTable *videoPlaybackOverlayViews = VideoPlaybackOverlayViews(self.view);
+	UIView *videoPlaybackOverlayView = [videoPlaybackOverlayViews objectForKey:VideoPlaybackOverlayViewKey];
+	return !videoPlaybackOverlayView.isHidden;
+}
+
+- (void) setOverlayVisible_xcd:(BOOL)overlayVisible
+{
+	NSString *videoViewController = [@[ @"video", @"View", @"Controller" ] componentsJoinedByString:@""];
+	NSString *inlineVideoControllerKeyPath = [@[ @"implementation", videoViewController ] componentsJoinedByString:@"."];
+	@try
+	{
+		id inlineVideoController = [self valueForKeyPath:inlineVideoControllerKeyPath];
+		SEL selector = NSSelectorFromString([@[ @"set", @"Controls", @"Overlay", @"Visible", @":", @"animate", @":" ] componentsJoinedByString:@""]);
+		NSMethodSignature *methodSignature = [inlineVideoController methodSignatureForSelector:selector];
+		if (methodSignature.numberOfArguments != 4)
+			return;
+		
+		const char *returnType = methodSignature.methodReturnType;
+		const char *firstArgType = [methodSignature getArgumentTypeAtIndex:2];
+		const char *secondArgType = [methodSignature getArgumentTypeAtIndex:3];
+		if (strncmp(returnType, @encode(void), 1) == 0 && strncmp(firstArgType, @encode(BOOL), 1) == 0 && strncmp(secondArgType, @encode(BOOL), 1) == 0)
+		{
+			// Equivalent to [inlineVideoController setControlsOverlayVisible:overlayVisible animate:NO];
+			// This is what is called in the -[MPInlineVideoController _viewWasTapped:] implementation
+			NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+			[invocation setTarget:inlineVideoController];
+			[invocation setSelector:selector];
+			[invocation setArgument:&overlayVisible atIndex:2];
+			BOOL animate = NO;
+			[invocation setArgument:&animate atIndex:3];
+			[invocation invoke];
+		}
+	}
+	@catch (NSException *exception)
+	{
+		NSLog(@"%@", exception);
+	}
 }
 
 @end

@@ -17,4 +17,6 @@ extern NSString *const XCDOverlayViewDidHideNotification;
 
 @property (nonatomic, strong) NSSet *interactiveOverlayViews_xcd;
 
+@property (nonatomic, assign, getter = isOverlayVisible_xcd) BOOL overlayVisible_xcd;
+
 @end
