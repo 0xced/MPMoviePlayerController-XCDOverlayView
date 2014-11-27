@@ -51,6 +51,9 @@
 	MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:movieURL];
 	[self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
 	
+	[[NSNotificationCenter defaultCenter] removeObserver:moviePlayerViewController name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController.moviePlayer];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController.moviePlayer];
+	
 	if (!self.displayOverlaySwitch.on)
 		return;
 	
@@ -68,6 +71,24 @@
 {
 	BOOL displayExplanationLabel = self.localMovieSwitch.on && !self.isValidMoviePath;
 	self.explanationLabel.hidden = !displayExplanationLabel;
+}
+
+#pragma mark - Notifications
+
+- (void) moviePlayerPlaybackDidFinish:(NSNotification *)notification
+{
+	MPMoviePlayerController *moviePlayerController = notification.object;
+	MPMovieFinishReason finishReason = [notification.userInfo[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] integerValue];
+	switch (finishReason)
+	{
+		case MPMovieFinishReasonUserExited:
+		case MPMovieFinishReasonPlaybackError:
+			[self dismissMoviePlayerViewControllerAnimated];
+			break;
+		case MPMovieFinishReasonPlaybackEnded:
+			moviePlayerController.overlayVisible_xcd = YES;
+			break;
+	}
 }
 
 #pragma mark - Movie Metadata
