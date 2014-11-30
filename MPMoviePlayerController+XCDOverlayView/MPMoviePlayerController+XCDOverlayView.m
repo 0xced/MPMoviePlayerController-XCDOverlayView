@@ -318,7 +318,7 @@ static void *InteractiveOverlayViewsKey = &InteractiveOverlayViewsKey;
 		const char *returnType = methodSignature.methodReturnType;
 		const char *firstArgType = [methodSignature getArgumentTypeAtIndex:2];
 		const char *secondArgType = [methodSignature getArgumentTypeAtIndex:3];
-		if (strncmp(returnType, @encode(void), 1) == 0 && strncmp(firstArgType, @encode(BOOL), 1) == 0 && strncmp(secondArgType, @encode(BOOL), 1) == 0)
+		if (strcmp(returnType, @encode(void)) == 0 && strcmp(firstArgType, @encode(BOOL)) == 0 && strcmp(secondArgType, @encode(BOOL)) == 0)
 		{
 			// Equivalent to [inlineVideoController setControlsOverlayVisible:overlayVisible animate:NO];
 			// This is what is called in the -[MPInlineVideoController _viewWasTapped:] implementation
